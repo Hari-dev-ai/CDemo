@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CDemo Health — Your Trusted Healthcare Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-50:  #effcf8;
+    --teal-100: #cff6ec;
+    --teal-200: #9eecd9;
+    --teal-400: #3ecfb2;
+    --teal-500: #1fb896;
+    --teal-600: #0f9e80;
+    --teal-700: #0c7a65;
+    --teal-900: #073a32;
+    --coral:    #ff7a66;
+    --coral-dk: #e85c47;
+    --ink:      #0e1f2c;
+    --ink-soft: #4a5a68;
+    --mute:     #7a8896;
+    --bg:       #fbfdfc;
+    --card:     #ffffff;
+    --line:     #e6ece9;
+    --shadow-sm: 0 1px 2px rgba(7, 58, 50, 0.06);
+    --shadow-md: 0 10px 30px rgba(7, 58, 50, 0.08);
+    --shadow-lg: 0 24px 60px rgba(7, 58, 50, 0.12);
+    --radius:   18px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Top Strip ---------- */
+  .top-strip {
+    background: var(--teal-900);
+    color: var(--teal-100);
+    font-size: 13px;
+    padding: 8px 0;
+  }
+  .top-strip .container {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .top-strip a { color: var(--teal-100); }
+  .top-strip .contact-list { display: flex; gap: 20px; flex-wrap: wrap; }
+  .top-strip .contact-list span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ---------- Header ---------- */
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Fraunces', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--teal-700);
+  }
+  .logo-mark {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+    border-radius: 10px;
+    display: grid; place-items: center;
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
+  .logo-mark svg { width: 22px; height: 22px; }
+  nav ul {
+    display: flex; gap: 32px; list-style: none;
+  }
+  nav ul a {
+    font-size: 15px; font-weight: 500;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+    position: relative;
+  }
+  nav ul a:hover { color: var(--teal-600); }
+  nav ul a::after {
+    content: ''; position: absolute; left: 0; bottom: -6px;
+    width: 0; height: 2px; background: var(--teal-500);
+    transition: width 0.3s;
+  }
+  nav ul a:hover::after { width: 100%; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 14px;
+    cursor: pointer; border: none;
+    transition: all 0.25s ease;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary {
+    background: var(--teal-600); color: white;
+    box-shadow: 0 6px 18px rgba(15, 158, 128, 0.35);
+  }
+  .btn-primary:hover {
+    background: var(--teal-700);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 158, 128, 0.45);
+  }
+  .btn-ghost {
+    background: transparent; color: var(--teal-700);
+    border: 1.5px solid var(--teal-200);
+  }
+  .btn-ghost:hover { background: var(--teal-50); border-color: var(--teal-400); }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 80px 0 100px;
+    background:
+      radial-gradient(ellipse at top right, var(--teal-100), transparent 60%),
+      radial-gradient(ellipse at bottom left, #fff5f2, transparent 55%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15, 158, 128, 0.08) 1px, transparent 0);
+    background-size: 32px 32px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 60px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--teal-200);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 500; color: var(--teal-700);
+    box-shadow: var(--shadow-sm);
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal-500); animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(31, 184, 150, 0.6); }
+    50%     { box-shadow: 0 0 0 8px rgba(31, 184, 150, 0); }
+  }
+  .hero h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.05;
+    margin: 20px 0 20px;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--teal-600);
+    font-weight: 500;
+  }
+  .hero p.lead {
+    font-size: 18px; color: var(--ink-soft);
+    max-width: 520px; margin-bottom: 32px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid var(--line);
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--teal-700);
+  }
+  .stat .label {
+    font-size: 13px; color: var(--mute);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative; aspect-ratio: 1 / 1.05;
+    display: grid; place-items: center;
+  }
+  .hero-card {
+    position: absolute; background: var(--card);
+    border-radius: var(--radius); padding: 18px 22px;
+    box-shadow: var(--shadow-lg); display: flex;
+    align-items: center; gap: 14px;
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
+  .hero-card .icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; color: white;
+  }
+  .hero-card .title { font-weight: 600; font-size: 14px; }
+  .hero-card .sub { font-size: 12px; color: var(--mute); }
+  .hc-1 { top: 8%; left: -4%; animation-delay: 0s; }
+  .hc-1 .icon { background: var(--teal-600); }
+  .hc-2 { top: 42%; right: -6%; animation-delay: 1s; }
+  .hc-2 .icon { background: var(--coral); }
+  .hc-3 { bottom: 6%; left: 10%; animation-delay: 2s; }
+  .hc-3 .icon { background: #3b82f6; }
+  .hero-orb {
+    width: 78%; aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, var(--teal-200), var(--teal-500) 60%, var(--teal-700));
+    box-shadow:
+      inset -30px -30px 80px rgba(7, 58, 50, 0.3),
+      0 40px 80px rgba(15, 158, 128, 0.3);
+    position: relative;
+  }
+  .hero-orb::before {
+    content: ''; position: absolute; inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 50%);
+  }
+  .cross {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; font-family: 'Fraunces', serif;
+    font-size: 140px; font-weight: 700; line-height: 1;
+    text-shadow: 0 6px 30px rgba(0,0,0,0.25);
+  }
+
+  /* ---------- Section base ---------- */
+  section { padding: 90px 0; }
+  .section-head { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+  .section-head .eyebrow { margin-bottom: 16px; }
+  .section-head h2 {
+    font-size: clamp(30px, 3.6vw, 46px); line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .section-head p { color: var(--ink-soft); font-size: 17px; }
+
+  /* ---------- Services ---------- */
+  .services { background: var(--card); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .service-card {
+    position: relative; cursor: pointer;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--teal-50), transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--teal-200);
+    box-shadow: var(--shadow-md);
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card > * { position: relative; z-index: 1; }
+  .service-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    background: var(--teal-100); color: var(--teal-700);
+    display: grid; place-items: center;
+    margin-bottom: 18px;
+    transition: all 0.3s;
+  }
+  .service-card:hover .service-icon {
+    background: var(--teal-600); color: white;
+    transform: rotate(-5deg) scale(1.05);
+  }
+  .service-icon svg { width: 26px; height: 26px; }
+  .service-card h3 {
+    font-size: 20px; margin-bottom: 8px;
+  }
+  .service-card p {
+    font-size: 14px; color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--teal-700);
+  }
+  .service-link svg { transition: transform 0.3s; }
+  .service-card:hover .service-link svg { transform: translateX(4px); }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(7, 58, 50, 0.55);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .modal-overlay.active { display: flex; opacity: 1; }
+  .modal {
+    background: var(--card);
+    border-radius: 24px;
+    width: 100%; max-width: 680px;
+    max-height: 88vh; overflow-y: auto;
+    transform: scale(0.92); transition: transform 0.3s;
+    box-shadow: var(--shadow-lg);
+  }
+  .modal-overlay.active .modal { transform: scale(1); }
+  .modal-header {
+    padding: 32px 36px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: flex-start; gap: 18px;
+    position: relative;
+  }
+  .modal-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--teal-100); color: var(--teal-700);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .modal-icon svg { width: 28px; height: 28px; }
+  .modal-header h3 { font-size: 26px; margin-bottom: 4px; }
+  .modal-header p { color: var(--mute); font-size: 14px; }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg); border: none; cursor: pointer;
+    display: grid; place-items: center;
+    color: var(--ink-soft);
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: var(--teal-100); color: var(--teal-700); }
+  .modal-body { padding: 28px 36px 32px; }
+  .modal-body h4 {
+    font-size: 16px; font-family: 'Inter', sans-serif;
+    font-weight: 600; margin: 22px 0 10px;
+    color: var(--ink);
+  }
+  .modal-body h4:first-child { margin-top: 0; }
+  .modal-body p { color: var(--ink-soft); margin-bottom: 12px; }
+  .modal-body ul { list-style: none; }
+  .modal-body ul li {
+    padding: 8px 0 8px 28px;
+    position: relative; color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .modal-body ul li::before {
+    content: ''; position: absolute;
+    left: 0; top: 14px;
+    width: 16px; height: 16px;
+    background: var(--teal-100);
+    border-radius: 50%;
+  }
+  .modal-body ul li::after {
+    content: ''; position: absolute;
+    left: 4px; top: 17px;
+    width: 7px; height: 4px;
+    border-left: 2px solid var(--teal-700);
+    border-bottom: 2px solid var(--teal-700);
+    transform: rotate(-45deg);
+  }
+  .modal-footer {
+    padding: 20px 36px 32px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+
+  /* ---------- Why Us ---------- */
+  .why {
+    background: linear-gradient(180deg, var(--bg), var(--teal-50));
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .why-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 26px;
+    border: 1px solid var(--line);
+    transition: transform 0.3s;
+  }
+  .why-card:hover { transform: translateY(-4px); }
+  .why-num {
+    font-family: 'Fraunces', serif;
+    font-size: 40px; font-weight: 700;
+    color: var(--coral);
+    line-height: 1; margin-bottom: 16px;
+    font-style: italic;
+  }
+  .why-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .why-card p { font-size: 14px; color: var(--ink-soft); }
+
+  /* ---------- CTA Band ---------- */
+  .cta-band {
+    background: linear-gradient(135deg, var(--teal-700), var(--teal-900));
+    color: white; padding: 70px 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 50%, rgba(255, 122, 102, 0.25), transparent 50%);
+  }
+  .cta-band .container {
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 40px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .cta-band h2 {
+    color: white; font-size: clamp(26px, 3vw, 38px); margin-bottom: 10px;
+  }
+  .cta-band p { opacity: 0.85; max-width: 520px; }
+  .cta-band .btn-primary {
+    background: var(--coral); box-shadow: 0 6px 18px rgba(255, 122, 102, 0.45);
+  }
+  .cta-band .btn-primary:hover { background: var(--coral-dk); }
+
+  /* ---------- Testimonials ---------- */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .t-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+  }
+  .t-card::before {
+    content: '“';
+    position: absolute; top: -10px; left: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 80px; line-height: 1;
+    color: var(--teal-200);
+  }
+  .stars { color: #fbbf24; margin-bottom: 12px; font-size: 15px; }
+  .t-card p { color: var(--ink-soft); margin-bottom: 20px; font-size: 15px; }
+  .t-author { display: flex; align-items: center; gap: 12px; }
+  .t-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-400), var(--teal-700));
+    color: white; display: grid; place-items: center;
+    font-weight: 600; font-size: 16px;
+  }
+  .t-author .name { font-weight: 600; font-size: 14px; }
+  .t-author .role { font-size: 12px; color: var(--mute); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--ink); color: #a7b5c2;
+    padding: 70px 0 24px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 48px;
+  }
+  footer h4 {
+    color: white; font-family: 'Inter', sans-serif;
+    font-size: 14px; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 18px;
+  }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer a { font-size: 14px; transition: color 0.2s; }
+  footer a:hover { color: var(--teal-400); }
+  .footer-brand .logo { color: white; margin-bottom: 14px; }
+  .footer-brand p { font-size: 14px; max-width: 320px; }
+  .socials { display: flex; gap: 10px; margin-top: 18px; }
+  .socials a {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: grid; place-items: center; color: white;
+    transition: background 0.2s;
+  }
+  .socials a:hover { background: var(--teal-600); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px; display: flex;
+    justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 13px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .menu-toggle { display: block; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { max-width: 420px; margin: 0 auto; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cta-band .container { text-align: center; justify-content: center; }
+  }
+  @media (max-width: 560px) {
+    section { padding: 60px 0; }
+    .hero { padding: 50px 0 70px; }
+    .hero-stats { grid-template-columns: 1fr; gap: 16px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .modal-header, .modal-body, .modal-footer { padding-left: 22px; padding-right: 22px; }
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Top contact strip -->
+<div class="top-strip">
+  <div class="container">
+    <div class="contact-list">
+      <span>📞 +91 98765 43210</span>
+      <span>✉️ care@cdemohealth.com</span>
+    </div>
+    <div>Mon–Sat: 8:00 AM – 9:00 PM · 24×7 Emergency</div>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
+      </span>
+      CDemo
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="#contact" class="btn btn-primary">Book Appointment</a>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Trusted by 2+ lakh families</span>
+      <h1>Healthcare that <em>actually</em> cares about you.</h1>
+      <p class="lead">At CDemo, we bring doctors, diagnostics, medicines and everyday wellness under one calm, reliable roof — because staying healthy shouldn't feel like a full-time job.</p>
+      <div class="hero-ctas">
+        <a href="#services" class="btn btn-primary">
+          Explore Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">Talk to a Doctor</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num">200K+</div><div class="label">Patients Served</div></div>
+        <div class="stat"><div class="num">150+</div><div class="label">Specialist Doctors</div></div>
+        <div class="stat"><div class="num">4.8★</div><div class="label">Avg. Rating</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-orb">
+        <span class="cross">+</span>
+      </div>
+      <div class="hero-card hc-1">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div>
+          <div class="title">Heart Check-up</div>
+          <div class="sub">Booked in 2 mins</div>
+        </div>
+      </div>
+      <div class="hero-card hc-2">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div>
+          <div class="title">Lab at Home</div>
+          <div class="sub">Report in 6 hrs</div>
+        </div>
+      </div>
+      <div class="hero-card hc-3">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div>
+          <div class="title">24×7 Tele-consult</div>
+          <div class="sub">Doctor in 10 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we offer</span>
+      <h2>Complete care, one tap away</h2>
+      <p>From daily vitamins to complex surgeries — click any service to see what's included, pricing and how to book.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <!-- Cards injected via JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-header">
+      <div class="modal-icon" id="modalIcon"></div>
+      <div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalTag"></p>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <a href="#contact" class="btn btn-primary" onclick="closeModal()">Book Now</a>
+      <a href="#" class="btn btn-ghost" onclick="event.preventDefault(); closeModal();">Call for Info</a>
+    </div>
+  </div>
+</div>
+
+<!-- Why Us -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why CDemo</span>
+      <h2>Built around you, not the system</h2>
+      <p>Healthcare has too much jargon and too little warmth. We're changing that.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">01</div>
+        <h3>Verified specialists</h3>
+        <p>Every doctor on CDemo is board-certified and reviewed by real patients like you.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">02</div>
+        <h3>Upfront pricing</h3>
+        <p>No surprise bills. See the exact cost of every test and consult before you book.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">03</div>
+        <h3>Reports you understand</h3>
+        <p>We explain your results in plain language — no confusing medical terms.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">04</div>
+        <h3>Care that follows up</h3>
+        <p>Our team checks in after every consult to make sure you're actually getting better.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Real stories</span>
+      <h2>Over 50,000 5-star reviews</h2>
+      <p>Hear from the people who made CDemo their family's healthcare home.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>Booked a full body check-up for my parents — the technician arrived on time, was super gentle, and the reports came with a phone call explanation. Worth every rupee.</p>
+        <div class="t-author">
+          <div class="t-avatar">PR</div>
+          <div><div class="name">Priya R.</div><div class="role">Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>My father's diabetes consult happened at 10pm on a Sunday. Dr. Menon was calm, thorough, and followed up the next morning. This is what healthcare should feel like.</p>
+        <div class="t-author">
+          <div class="t-avatar">AK</div>
+          <div><div class="name">Arjun K.</div><div class="role">Kolkata</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>I've never had a dental clinic explain a treatment plan without making me feel pressured. CDemo's team walked me through every option, with clear pricing. Finally.</p>
+        <div class="t-author">
+          <div class="t-avatar">SM</div>
+          <div><div class="name">Sneha M.</div><div class="role">Mumbai</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<section class="cta-band" id="contact">
+  <div class="container">
+    <div>
+      <h2>Not feeling great? Let's fix that today.</h2>
+      <p>Book a free 10-minute consultation with a CDemo doctor. No commitment, no waiting rooms.</p>
+    </div>
+    <a href="#" class="btn btn-primary" onclick="event.preventDefault(); alert('Thanks! Our care team will call you within 10 minutes.');">
+      Get a Free Consult
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
+          </span>
+          CDemo
+        </a>
+        <p>Honest, accessible healthcare for Indian families. Doctors, diagnostics and daily wellness — simplified.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.6 9.9v-7H8v-2.9h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.2 2.1.2v2.3h-1.2c-1.2 0-1.5.7-1.5 1.5v1.8h2.6l-.4 2.9h-2.2v7A10 10 0 0022 12z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1112.6 8 4 4 0 0116 11.4zM17.5 6.5h.01"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2H21l-6.5 7.4L22 22h-6.4l-5-6.6L4.8 22H2l7-8L1.5 2H8l4.5 6L18.2 2z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Online Consult</a></li>
+          <li><a href="#services">Lab Tests</a></li>
+          <li><a href="#services">Pharmacy</a></li>
+          <li><a href="#services">Health Checkups</a></li>
+          <li><a href="#services">Mental Health</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Doctors</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 CDemo Health Pvt. Ltd. All rights reserved.</div>
+      <div>Made with care in India 🇮🇳</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------------- Services data ----------------
+  const services = [
+    {
+      id: 'consult',
+      title: 'Online Doctor Consultation',
+      tag: 'Available 24×7 · Avg wait 10 min',
+      iconBg: '#0f9e80',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+      short: 'Talk to verified specialists from 25+ fields, right from your phone.',
+      details: {
+        about: 'Get personalized advice from certified doctors without leaving home. Share symptoms, reports and photos securely — get a digital prescription in minutes.',
+        features: [
+          'Consult in 15+ Indian languages',
+          'Choose from General Physicians, Dermatologists, Paediatricians and more',
+          'Encrypted video or audio calls',
+          'E-prescription valid at 20,000+ pharmacies',
+          'Free follow-up within 7 days'
+        ],
+        pricing: 'Starts at ₹199 per consult'
+      }
+    },
+    {
+      id: 'labs',
+      title: 'Lab Tests at Home',
+      tag: 'Sample collection in 60 min',
+      iconBg: '#ff7a66',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v8l-5 7a3 3 0 002.7 4h8.6a3 3 0 002.7-4l-5-7V2"/><path d="M8 2h8"/></svg>`,
+      short: 'NABL-certified diagnostics, collected from your doorstep.',
+      details: {
+        about: 'Skip the queue — our trained phlebotomists come to you at a slot of your choice. Samples are tested at NABL-accredited labs, reports delivered on WhatsApp and email.',
+        features: [
+          '2,500+ tests and packages available',
+          'Same-day reports for routine tests',
+          'Free report consultation with a doctor',
+          'Contactless, sterile collection kits',
+          'Covers 300+ cities across India'
+        ],
+        pricing: 'Starts at ₹99 per test · Full body checkup from ₹999'
+      }
+    },
+    {
+      id: 'pharmacy',
+      title: 'Online Pharmacy',
+      tag: 'Up to 30% off · Free delivery',
+      iconBg: '#3b82f6',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg>`,
+      short: 'Genuine medicines delivered to your door, fast.',
+      details: {
+        about: 'Upload your prescription or search by medicine name. Our licensed pharmacists verify every order, and our cold-chain logistics ensure medicines arrive safely.',
+        features: [
+          '100% genuine medicines from authorised distributors',
+          'Flat 20–30% off on most brands',
+          'Free delivery on orders above ₹499',
+          'Subscription plans for chronic care',
+          'Refund guarantee on damaged deliveries'
+        ],
+        pricing: 'Free delivery above ₹499 · Subscription from ₹299/month'
+      }
+    },
+    {
+      id: 'checkup',
+      title: 'Full Health Checkups',
+      tag: 'Preventive care packages',
+      iconBg: '#8b5cf6',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+      short: 'Comprehensive screenings designed for every life stage.',
+      details: {
+        about: 'Catch issues before they become problems. Our age-specific packages cover heart, liver, kidneys, thyroid, vitamins, diabetes and cancer markers — with a doctor debrief at the end.',
+        features: [
+          'Basic (40 tests), Advanced (70 tests), Premium (90+ tests)',
+          'Tailored for men, women, seniors and couples',
+          'Includes ECG, X-Ray and specialist review at partner clinics',
+          'Digital health record stored in your CDemo account',
+          'Free nutritionist consultation with every plan'
+        ],
+        pricing: 'Basic ₹999 · Advanced ₹1,999 · Premium ₹3,499'
+      }
+    },
+    {
+      id: 'mental',
+      title: 'Mental Health & Therapy',
+      tag: 'Confidential · Judgment-free',
+      iconBg: '#ec4899',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+      short: 'Therapy, couples counselling and psychiatry — online and private.',
+      details: {
+        about: 'Whether you\'re dealing with anxiety, burnout, relationship issues or something harder to name, our licensed therapists are here to listen. Sessions are 100% confidential.',
+        features: [
+          '50-minute sessions with verified clinical psychologists',
+          'CBT, mindfulness-based and trauma-informed approaches',
+          'Anonymous mode available',
+          'Psychiatric consultation for medication, if needed',
+          'Sliding-scale pricing for students'
+        ],
+        pricing: 'Therapy from ₹999 / session · Psychiatry from ₹1,499'
+      }
+    },
+    {
+      id: 'dental',
+      title: 'Dental Care',
+      tag: 'Cleaning to implants',
+      iconBg: '#06b6d4',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1-.5 2-1 3l-3 13-3-13c-.5-1-1-2-1-3a4 4 0 0 1 4-4z"/></svg>`,
+      short: 'From routine cleanings to full smile makeovers.',
+      details: {
+        about: 'Our partner dental clinics use modern equipment and transparent pricing. Every treatment plan is explained before work begins — no surprise costs.',
+        features: [
+          'Free initial consultation and X-ray',
+          'Digital scans for crowns and aligners',
+          'Painless root canal in a single sitting',
+          'EMI options on major procedures',
+          '1-year warranty on crowns, bridges and implants'
+        ],
+        pricing: 'Cleaning ₹699 · RCT from ₹3,500 · Implants from ₹22,000'
+      }
+    },
+    {
+      id: 'women',
+      title: 'Women\'s Health',
+      tag: 'Gynaecology, PCOS, pregnancy',
+      iconBg: '#f59e0b',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19h6"/></svg>`,
+      short: 'Care for every chapter — from first period to menopause.',
+      details: {
+        about: 'Dedicated programs for PCOS, fertility, pregnancy, postpartum and menopause. All consults with female gynaecologists if preferred.',
+        features: [
+          'PCOS management with nutrition + medication plans',
+          'Antenatal packages with monthly checkups and scans',
+          'IVF and fertility counselling via partner hospitals',
+          'Menopause and hormone therapy guidance',
+          'Confidential contraception and STI consults'
+        ],
+        pricing: 'Gynae consult from ₹499 · Pregnancy package from ₹9,999'
+      }
+    },
+    {
+      id: 'emergency',
+      title: 'Emergency & Ambulance',
+      tag: '24×7 · GPS-tracked',
+      iconBg: '#ef4444',
+      iconColor: '#ffffff',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4v-4h4V9h-4V5h-4v4H6v4h4z"/><rect x="2" y="2" width="20" height="20" rx="3"/></svg>`,
+      short: 'Life-saving response, one tap away.',
+      details: {
+        about: 'Our ambulance network reaches most metro locations within 15 minutes. Every vehicle is equipped with oxygen, defibrillator and a trained paramedic.',
+        features: [
+          'Basic Life Support and Advanced Life Support ambulances',
+          'Live GPS tracking for families',
+          'Pre-arrival hospital coordination',
+          'Neonatal and cardiac-specialised units',
+          'Cashless empanelment with 1,500+ hospitals'
+        ],
+        pricing: 'BLS ₹1,500 onwards · ALS ₹3,500 onwards (per trip)'
+      }
+    }
+  ];
+
+  // ---------------- Render service cards ----------------
+  const grid = document.getElementById('servicesGrid');
+  services.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'service-card reveal';
+    card.style.animationDelay = `${i * 60}ms`;
+    card.innerHTML = `
+      <div class="service-icon">${s.icon}</div>
+      <h3>${s.title}</h3>
+      <p>${s.short}</p>
+      <span class="service-link">
+        Learn more
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </span>
+    `;
+    card.addEventListener('click', () => openModal(s));
+    grid.appendChild(card);
+  });
+
+  // ---------------- Modal logic ----------------
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalTag = document.getElementById('modalTag');
+  const modalIcon = document.getElementById('modalIcon');
+  const modalBody = document.getElementById('modalBody');
+
+  function openModal(s) {
+    modalTitle.textContent = s.title;
+    modalTag.textContent = s.tag;
+    modalIcon.innerHTML = s.icon;
+    modalIcon.style.background = s.iconBg;
+    modalIcon.style.color = s.iconColor;
+
+    modalBody.innerHTML = `
+      <h4>About this service</h4>
+      <p>${s.details.about}</p>
+      <h4>What's included</h4>
+      <ul>${s.details.features.map(f => `<li>${f}</li>`).join('')}</ul>
+      <h4>Pricing</h4>
+      <p style="color:var(--teal-700); font-weight:600;">${s.details.pricing}</p>
+    `;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // ---------------- Scroll reveal ----------------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
